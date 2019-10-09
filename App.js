@@ -24,7 +24,7 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-import Home from "./assets/home.js";
+import Home from "./scr/screen/Home.js";
 
 const App: () => React$Node = () => {
   return (
@@ -113,4 +113,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default Home;
