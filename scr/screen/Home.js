@@ -1,7 +1,72 @@
 import React, {Component} from 'react';
-import {Text, View, StyleSheet, ScrollView, Image} from 'react-native';
+import {Text, View, StyleSheet, ScrollView, Image, Button, FlatList, ActivityIndicator} from 'react-native';
+
+import * as firebase from 'firebase';
 
 export default class Home extends Component {
+  constructor(props) {
+    super(props);
+    console.log('Constructor Called.');
+    this.state = {
+      Dosen: [],
+      Pesan: []
+    };
+  }
+
+  componentDidMount() {
+    firebase.database().ref('Dosen/').on('value', (data) => {
+      if (data.val())
+      {
+        this.setState({Dosen:data.val()})
+        console.log(data.val())
+      }
+      console.log(data)
+    }),
+
+    firebase.database().ref('Pesan/').on('value', (data) => {
+      if (data.val())
+      {
+        this.setState({Pesan:data.val()})
+        console.log(data.val())
+      }
+      console.log(data)
+    })
+
+  }
+
+  getFlatListDosen() {
+    return (
+    <FlatList key="flatList"
+      data={this.state.Dosen}
+      keyExtractor={(item, index) => (`${item}--${index}`)}
+      renderItem = {({ item, index }) =>
+        <View style={{flexDirection: 'row'}}>
+          <View style={{paddingTop: 20,paddingBottom: 20,}}>
+            <View style={{ borderRadius:50, backgroundColor: item.status == 0 ? 'red' : 'green', width:15, height:15}}></View>
+          </View>
+          <Text style={{paddingTop: 20,paddingBottom: 20, paddingLeft: 10,}}>{item.nama}</Text>
+        </View>
+      } />
+  );
+  }
+
+  getFlatListPesan() {
+    return(
+      <FlatList
+        key='fListPesan'
+        data={this.state.Pesan}
+        keyExtractor={(item, index) => (`${item}--${index}`)}
+        renderItem= {({item, index}) =>
+          <View style={styles.isiInfomasi}>
+            <View>
+              <Text style={{fontSize:9}}>{item.waktu}</Text>
+            </View>
+            <Text>{item.pesan}</Text>
+          </View>
+        }
+      />);
+  }
+
   render() {
     return(
       <View style={styles.container}>
@@ -11,30 +76,11 @@ export default class Home extends Component {
         <View style={{flex: 0.6}}>
           <View style={styles.ketDosen}>
             <Text>Keterangan Dosen Disinih : </Text>
-            <View style={{flexDirection: 'row'}}>
-              <View style={{paddingTop: 20,paddingBottom: 20,}}>
-                <View style={{ borderRadius:50, backgroundColor: 'red', width:15, height:15}}></View>
+            <ScrollView>
+              <View>
+              {this.getFlatListDosen()}
               </View>
-              <Text style={{paddingTop: 20,paddingBottom: 20, paddingLeft: 10,}}>Dosen A</Text>
-            </View>
-            <View style={{flexDirection: 'row'}}>
-              <View style={{paddingTop: 20,paddingBottom: 20,}}>
-                <View style={{ borderRadius:50, backgroundColor: 'green', width:15, height:15}}></View>
-              </View>
-              <Text style={{paddingTop: 20,paddingBottom: 20, paddingLeft: 10,}}>Dosen B</Text>
-            </View>
-            <View style={{flexDirection: 'row'}}>
-              <View style={{paddingTop: 20,paddingBottom: 20,}}>
-                <View style={{ borderRadius:50, backgroundColor: 'red', width:15, height:15}}></View>
-              </View>
-              <Text style={{paddingTop: 20,paddingBottom: 20, paddingLeft: 10,}}>Dosen C</Text>
-            </View>
-            <View style={{flexDirection: 'row'}}>
-            <View style={{paddingTop: 20,paddingBottom: 20,}}>
-              <View style={{ borderRadius:50, backgroundColor: 'green', width:15, height:15}}></View>
-            </View>
-              <Text style={{paddingTop: 20,paddingBottom: 20, paddingLeft: 10,}}>Dosen C</Text>
-            </View>
+            </ScrollView>
           </View>
         </View>
 
@@ -42,25 +88,8 @@ export default class Home extends Component {
             <View style={styles.infoFakultas}>
               <Text>Informasi Fakultas : </Text>
               <ScrollView>
-                <View style={styles.isiInfomasi}>
-                  <Text>Informasi Dari Fakultas berdasarkan informasi terupdate dan terbaru, paling atas adalah informasi paling baru,
-                  kemudian disusul informasi sebelumnya dan begitu trus</Text>
-                </View>
-                <View style={styles.isiInfomasi}>
-                  <Text>Informasi Dari Fakultas berdasarkan informasi terupdate dan terbaru, paling atas adalah informasi paling baru,
-                  kemudian disusul informasi sebelumnya dan begitu trus</Text>
-                </View>
-                <View style={styles.isiInfomasi}>
-                  <Text>Informasi Dari Fakultas berdasarkan informasi terupdate dan terbaru, paling atas adalah informasi paling baru,
-                  kemudian disusul informasi sebelumnya dan begitu trus</Text>
-                </View>
-                <View style={styles.isiInfomasi}>
-                  <Text>Informasi Dari Fakultas berdasarkan informasi terupdate dan terbaru, paling atas adalah informasi paling baru,
-                  kemudian disusul informasi sebelumnya dan begitu trus</Text>
-                </View>
-                <View style={styles.isiInfomasi}>
-                  <Text>Informasi Dari Fakultas berdasarkan informasi terupdate dan terbaru, paling atas adalah informasi paling baru,
-                  kemudian disusul informasi sebelumnya dan begitu trus</Text>
+                <View>
+                {this.getFlatListPesan()}
                 </View>
               </ScrollView>
             </View>
