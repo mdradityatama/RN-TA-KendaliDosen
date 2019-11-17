@@ -51,7 +51,7 @@ export default class Home extends Component {
             </View>
             <ScrollView>
               <View>
-              {this.getFlatListPesan()}
+                {this.getFlatListPesan()}
               </View>
             </ScrollView>
           </View>
@@ -84,9 +84,9 @@ const styles = StyleSheet.create({
   judul: {
     position: 'absolute',
     top: -20,
-    left: 100,
     alignItems: 'center',
     justifyContent: 'center',
+    alignSelf: 'center',
     borderRadius: 4,
     width: 230,
     backgroundColor: 'white',
