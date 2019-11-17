@@ -48,9 +48,9 @@ export default class Dosen extends Component {
 
         <View style={{flex: 1}}>
           <View style={styles.ketDosen}>
-          <View style={styles.judul}>
-            <Text style={{padding: 10}}>Keterangan Dosen Disinih : </Text>
-          </View>
+            <View style={styles.judul}>
+              <Text style={{padding: 10, fontWeight: 'bold'}}>Indicator Lecturer</Text>
+            </View>
             <ScrollView>
               <View>
               {this.getFlatListDosen()}

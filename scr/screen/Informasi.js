@@ -46,7 +46,9 @@ export default class Home extends Component {
       <View style={styles.container}>
         <View style={{flex: 1}}>
           <View style={styles.infoFakultas}>
-            <Text>Informasi Fakultas : </Text>
+            <View style={styles.judul}>
+              <Text style={{padding: 10, fontWeight: 'bold'}}>Information Faculty</Text>
+            </View>
             <ScrollView>
               <View>
               {this.getFlatListPesan()}
@@ -62,6 +64,7 @@ export default class Home extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "rgba(87,161,9,1)"
   },
   header: {
     height: 100,
@@ -70,15 +73,50 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2
   },
   infoFakultas: {
-    margin: 20,
-    padding: 10,
-    borderWidth: 0,
+    flex: 1,
+    backgroundColor: 'white',
+    marginTop: 50,
+    paddingTop: 20,
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
+    position: 'relative',
+  },
+  judul: {
+    position: 'absolute',
+    top: -20,
+    left: 100,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 4,
+    width: 230,
+    backgroundColor: 'white',
+    elevation: 15,
+    borderRadius: 4,
+    shadowOffset: {
+      height: 0,
+      width: 0
+    },
+    shadowColor: "rgba(0,0,0,1)",
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    overflow: "visible"
   },
   isiInfomasi: {
-    margin: 5,
-    padding: 20,
-    borderWidth: 2,
+    margin: 10,
+    padding: 10,
+    borderWidth: 0,
     borderRadius: 20,
+    backgroundColor: 'white',
+    elevation: 5,
+    borderRadius: 4,
+    shadowOffset: {
+      height: 0,
+      width: 0
+    },
+    shadowColor: "rgba(0,0,0,1)",
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    overflow: "visible"
   }
 
 });
