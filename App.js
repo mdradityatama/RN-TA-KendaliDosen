@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import * as firebase from 'firebase';
+import 'react-native-gesture-handler';
+
 
 import Home from "./scr/screen/Home.js";
 
-import * as firebase from 'firebase';
-import 'react-native-gesture-handler';
 
 var firebaseConfig = {
     apiKey: "AIzaSyDtvsI7BnGukE_wUThiiVTQHRB3WH1YGX0",
