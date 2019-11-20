@@ -28,7 +28,7 @@ export default class Home extends Component {
     return(
       <FlatList
         key='fListPesan'
-        data={this.state.Pesan}
+        data={this.state.Pesan.sort((a, b) => a.waktu.localeCompare(b))}
         keyExtractor={(item, index) => (`${item}--${index}`)}
         renderItem= {({item, index}) =>
           <View style={styles.isiInfomasi}>
